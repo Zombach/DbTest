@@ -1,0 +1,36 @@
+syntax = "proto3";
+
+option csharp_namespace = "DbTest.Cmd";
+
+package sequence;
+
+import "google/protobuf/empty.proto";
+
+service Sequences {
+    rpc InsertTVP(InsertCommand) returns (InsertResponse);
+    rpc SelectTVP(SelectCommand) returns (SelectResponse);
+}
+
+message InsertCommand {
+    repeated string sequences = 1;
+}
+
+message InsertResponse {
+    string message = 1;
+    bool isDone = 2;
+}
+
+message SelectCommand {
+    repeated int32 ids = 1;
+}
+
+message SelectResponse {
+    repeated SelectSequence sequences = 1;
+    string message = 2;
+    bool isDone = 3;
+}
+
+message SelectSequence {
+    int32 id = 1;
+    string seq = 2;
+}
